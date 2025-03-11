@@ -1,56 +1,74 @@
-/**
- * Takes a Fahrenheit temperature and returns the temperature in Celsius
- * @param {string} fahren - Temperature in degrees Fahrenheit
- * @returns {number} - Temperature in degrees Celsius
- */
-function convertToCelsius(fahren) {
-  return (fahren - 32) * (5 / 9);
-}
+// Complete the following functions to make our program work!
 
 /**
- * Takes a Fahrenheit temperature and its Celsius equivalent and returns a message based on the temperature range
- * @param {number} fahren - Temperature in degrees Fahrenheit
- * @returns {string} - Message indicating how the temperature feels
+ * Converts the given Fahrenheit temperature `f` to Celsius.
+ * @param {number} f temperature in °F
+ * @returns {number} temperature in °C
  */
-function createMessage(fahren) {
-  if (fahren < 32) {
-    return `The temperature ${fahren}°F (${celc}°C) feels very cold.`;
-  } else if (fahren < 64) {
-    return `The temperature ${fahren}°F (${celc}°C) feels cold.`;
-  } else if (fahren < 86) {
-    return `The temperature ${fahren}°F (${celc}°C) feels warm.`;
-  } else if (fahren < 100) {
-    return `The temperature ${fahren}°F (${celc}°C) feels hot.`;
-  } else {
-    return `The temperature ${fahren}°F (${celc}°C) is extremely hot!`;
+function convertToCelsius(f) {
+    return (f - 32) * (5 / 9);
   }
-}
-
-/**
- * Generates a random integer between 0 and the given limit
- * @param {number} limit - Upper limit for the random number
- * @returns {number} - Random integer between 0 and the limit
- */
-function rand(limit) {
-  return Math.floor(Math.random() * (limit + 1));
-}
-
-// -------------------- DO NOT CHANGE THE CODE BELOW ---------------------- //
-
-let fahren = prompt(
-  "Enter a number, we will convert that number from Fahrenheit to Celsius \n"
-);
-
-fahren = prompt(
-  "Let's try that again. Enter a number, we will convert that number from Fahrenheit to Celsius \n"
-);
-
-fahren = rand(110);
-celc = convertToCelsius(fahren);
-output = createMessage(fahren, celc);
-console.log(output);
-
-fahren = rand(110);
-celc = convertToCelsius(fahren);
-output = createMessage(fahren, celc);
-console.log(output);
+  
+  /**
+   * | Temperature | Description |
+   * | ----------- | ----------- |
+   * | < 32        | "very cold" |
+   * | < 64        | "cold"      |
+   * | < 86        | "warm"      |
+   * | < 100       | "hot"       |
+   * | >= 100      | "very hot"  |
+   *
+   * @param {number} f temperature in °F
+   * @returns {string} the description from the table above corresponding to
+   * the given Fahrenheit temperature `f`
+   */
+  function describeTemperature(f) {
+    if (f < 32) {
+      return `${f}°F very cold brr`;
+    } else if (f < 64) {
+      return `${f}°F it's still pretty cold`;
+    } else if (f < 86) {
+      return `${f}°F it's getting pretty warm!`;
+    } else if (f < 100) {
+      return `${f}°F it's getting hot!`;
+    } else if (f >= 100) {
+      return `${f}°F it's very hot!`;
+    }
+  }
+  /**
+   * @param {number} limit
+   * @returns {number} a random integer in the range [0, `limit`)
+   */
+  function getRandomInt(limit) {
+    return Math.floor(Math.getRandomInt() * (limit + 1));
+  }
+  
+  // -------------------- DO NOT CHANGE THE CODE BELOW ---------------------- //
+  /**
+   * Converts the given temperature from Fahrenheit to Celsius,
+   * then alerts the user with a descriptive message.
+   * @param {number} f temperature in °F
+   */
+  function parseFahrenheit(f) {
+    const c = convertToCelsius(f);
+    const description = describeTemperature(f);
+    const message = `${f}°F is ${c}°C. That is ${description}.`;
+    alert(message);
+  }
+  
+  const fahrenheitPrompt =
+    "Please enter a number. We will convert that temperature from Fahrenheit to Celsius.";
+  let f = prompt(fahrenheitPrompt);
+  parseFahrenheit(+f);
+  
+  alert("Let's try that again.");
+  f = prompt(fahrenheitPrompt);
+  parseFahrenheit(+f);
+  
+  alert("Let's try some random temperatures.");
+  f = getRandomInt(110);
+  parseFahrenheit(f);
+  
+  f = getRandomInt(110);
+  parseFahrenheit(f);
+  
